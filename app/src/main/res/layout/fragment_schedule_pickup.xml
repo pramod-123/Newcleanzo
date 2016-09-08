@@ -1,0 +1,154 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+      android:background="#4485C1E9"
+    tools:context="com.example.priyamkumar.newcleanzo.SchedulePickup">
+
+    <!-- TODO: Update blank fragment layout -->
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/linearLayout"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true"
+    android:weightSum="1">
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PRICE LIST"
+        android:textColor="#0000ff"
+        android:background="#06DCFC"
+        android:layout_marginRight="1dp"
+        android:id="@+id/button"
+        android:layout_weight="0.49" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:text="SCHEDULE"
+        android:textColor="#0000ff"
+        android:background="#06DCFC"
+        android:id="@+id/button2"
+        android:layout_weight="0.54" />
+</LinearLayout>
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="332dp"
+        android:layout_marginTop="2dp"
+
+
+        android:layout_x="12dp"
+        android:layout_y="8dp"
+        android:gravity="center"
+        android:horizontalSpacing="2dp"
+        android:verticalSpacing="2dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+    </GridView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please Select a Service"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:id="@+id/textView"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="65dp" />
+
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+                   android:layout_centerInParent="true"
+        android:layout_above="@+id/textView3">
+
+       <!-- <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/border"
+            android:layout_centerInParent="true"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@drawable/border"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@drawable/border"></LinearLayout>
+            -->
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:text="Regular&#10;48 hr"
+            android:textColor="#0000ff"
+            android:id="@+id/button3"
+            android:background="#ffffff"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:text="EXPRESS&#10;24 hr"
+            android:layout_marginLeft="2dp"
+            android:background="#ffffff"
+            android:textColor="#0000ff"
+            android:id="@+id/button4"
+            />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:text="SPECIAL&#10;12 hr"
+            android:layout_marginLeft="2dp"
+            android:textColor="#0000ff"
+            android:id="@+id/button5" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="italic"
+        android:text=""
+        android:textColor="#ff0000"
+        android:id="@+id/textView3"
+        android:layout_above="@+id/textView"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true" />
+
+    <android.support.v7.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:id="@+id/view2"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentStart="true">
+
+</android.support.v7.widget.LinearLayoutCompat>
+
+</RelativeLayout>
