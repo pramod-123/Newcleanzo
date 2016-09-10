@@ -2,5 +2,13 @@
     <string name="app_name">Newcleanzo</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="facebook_app_id">1417611958289493</string>
+    <string name="fb_login_protocol_scheme">fbAPP_1417611958289493</string>
+    <string name="USER_PROFILE">UserProfile</string>
+    <string name="first_name">firstName</string>
+    <string name="last_name">lastName</string>
+    <string name="phone_no">phoneNo</string>
+    <string name="email">email</string>
+    <string name="session">session</string>
+
 </resources>
