@@ -32,5 +32,6 @@ dependencies {
     compile 'com.mikhaellopez:circularimageview:3.0.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.katepratik.msg91-android-sdk:library:0.1'
+    compile 'com.msg91.sendotp.library:library:2.7'
 
 }
