@@ -181,6 +181,12 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         finish();
     }
 
+    @Override
+    public void setOnProfileTouch() {
+        startActivity(new Intent(MainActivity.this,EditDetailsActivity.class));
+        finish();
+    }
+
     void retieveDataFromServee(final String email){
         String url="http://192.168.1.5/myapp/login.php";
         final RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
@@ -194,6 +200,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
                     ProfileUpdate.getInstance(getApplicationContext()).updateProfileInfo();
                     startActivity(new Intent(MainActivity.this,MainActivity.class));
                     finish();
+                    requestQueue.stop();
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(),"Credential not exist",Toast.LENGTH_SHORT).show();
                     requestQueue.stop();

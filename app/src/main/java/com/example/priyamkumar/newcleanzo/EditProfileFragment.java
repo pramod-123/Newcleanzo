@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,7 @@ public class EditProfileFragment extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_profile_fragment);
         intialize();
+        Log.d("new Changes","showing");
         if(ProfileUpdate.profileBitmap==null){
             Drawable drawable=getDrawable(R.drawable.default_profile_pic);
             Bitmap bitmap=((BitmapDrawable)drawable).getBitmap();
