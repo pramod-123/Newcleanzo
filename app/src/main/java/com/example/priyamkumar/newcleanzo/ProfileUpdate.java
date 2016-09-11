@@ -63,7 +63,17 @@ public class ProfileUpdate {
 
 
     }
+    void writeBitmapTosharePref(Bitmap bitmap){
+        SharedPreferences sharedPreferences=context.getSharedPreferences(context.getString(R.string.USER_PROFILE),Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString(context.getString(R.string.profile_pic),BitmapToString.BitToString(bitmap));
+        editor.commit();
+    }
+    void getBackBitmap(){
+        SharedPreferences sharedPreferences=context.getSharedPreferences(context.getString(R.string.USER_PROFILE),Context.MODE_PRIVATE);
+        profileBitmap=BitmapToString.StringToBitmap(sharedPreferences.getString(context.getString(R.string.profile_pic),null));
 
+    }
     private ProfileUpdate(Context context) {
 
         this.context=context;

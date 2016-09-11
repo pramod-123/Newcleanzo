@@ -63,6 +63,7 @@ public class EditProfileFragment extends AppCompatActivity{
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ProfileUpdate.getInstance(getApplicationContext()).writeBitmapTosharePref(ProfileUpdate.profileBitmap);
                 saveToSerever(firstName.getText().toString(),lastName.getText().toString(),email.getText().toString(),phoneNo.getText().toString());
                 ProfileUpdate.getInstance(getApplicationContext()).writeIntoSharedPref(firstName.getText().toString(),lastName.getText().toString(),email.getText().toString(),phoneNo.getText().toString());
                 ProfileUpdate.getInstance(getApplicationContext()).updateProfileInfo();

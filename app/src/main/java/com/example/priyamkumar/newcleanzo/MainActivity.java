@@ -1,20 +1,16 @@
 package com.example.priyamkumar.newcleanzo;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
+
 import android.util.Log;
-import android.view.MenuItem;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -33,23 +29,29 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.Signature;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentButtonsClickListner,UserProfileFragment.OnUserProfielButtonsClickListner {
+public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentButtonsClickListner,UserProfileFragment.OnUserProfielButtonsClickListner, GoogleApiClient.OnConnectionFailedListener {
     Toolbar toolbar;
+    final static int RC_SIGN_IN=45;
+    GoogleSignInOptions gso;
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
+    GoogleApiClient mGoogleApiClient;
     private CallbackManager callbackManager;
     private ProfileTracker profileTracker;
     @Override
@@ -58,6 +60,17 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
+
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this ,this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
         callbackManager=CallbackManager.Factory.create();
         profileTracker=new ProfileTracker() {
             @Override
@@ -116,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
 
         ProfileUpdate.getInstance(getApplicationContext()).updateProfileInfo();
-
+        ProfileUpdate.getInstance(getApplicationContext()).getBackBitmap();
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         tabLayout= (TabLayout) findViewById(R.id.tabLayout);
@@ -140,9 +153,25 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode,resultCode,data);
-    }
+        if(requestCode==RC_SIGN_IN){
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
 
+        }else {
+
+            callbackManager.onActivityResult(requestCode,resultCode,data);
+
+        }
+    }
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d("result","handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+            new ImageDownHelper(getApplicationContext(),MainActivity.this).execute(acct.getPhotoUrl().toString(),acct.getEmail(),acct.getDisplayName(),acct.getDisplayName());
+
+        }
+    }
     @Override
     public void setOnFBLoginClickListner() {
         ArrayList<String> a = new ArrayList<String>();
@@ -153,7 +182,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
     @Override
     public void setOnGoogleClickListner() {
-
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
@@ -223,4 +253,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         requestQueue.add(stringRequest);
     }
 
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
 }

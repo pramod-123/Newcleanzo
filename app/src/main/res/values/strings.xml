@@ -10,5 +10,6 @@
     <string name="phone_no">phoneNo</string>
     <string name="email">email</string>
     <string name="session">session</string>
+    <string name="profile_pic">profilePic</string>
 
 </resources>

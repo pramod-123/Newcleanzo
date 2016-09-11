@@ -43,6 +43,7 @@ public class ImageDownHelper extends AsyncTask<String, Void, Bitmap> {
         Bitmap bm = null;
         try {
             URL aURL = new URL(urls[0]);
+            Log.d("photolink",aURL.toString());
             ProfileUpdate.firstName=urls[2];
             ProfileUpdate.lastName=urls[3];
             ProfileUpdate.email=urls[1];
@@ -65,6 +66,8 @@ public class ImageDownHelper extends AsyncTask<String, Void, Bitmap> {
         retieveDataFromServee(ProfileUpdate.email);
         Log.d("ProfileEmail",ProfileUpdate.email);
     }
+
+
     void retieveDataFromServee(final String email){
         String url="http://192.168.1.5/myapp/login.php";
         RequestQueue requestQueue= Volley.newRequestQueue(activity.getApplicationContext());
@@ -77,6 +80,7 @@ public class ImageDownHelper extends AsyncTask<String, Void, Bitmap> {
                         ProfileUpdate.getInstance(context).writeIntoSharedPref(jsonObject.getString("first_name"),jsonObject.getString("last_name"),jsonObject.getString("email"),jsonObject.getString("phone_no"));
                         ProfileUpdate.getInstance(context).updateProfileInfo();
                         activity.startActivity(new Intent(activity,MainActivity.class));
+                       ProfileUpdate.getInstance(context).writeBitmapTosharePref(ProfileUpdate.profileBitmap);
                         activity.finish();
                     } catch (JSONException e) {
                         e.printStackTrace();
